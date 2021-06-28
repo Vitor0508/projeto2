@@ -1,12 +1,43 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int menu();
+
+typedef struct smusica{
+	char nome[30], compositor[30];
+	int nota;
+}MUSICA;
+// Define a estrutura musica
+
+void cadastrarMusica(MUSICA musicas[], int i){
+	system("cls");
+    //Limpa tela do prompt de comando
+    
+	printf("\nDigite o nome da musica: ");
+	scanf("%s", musicas[i].nome);
+	// Le nome da musica
+	fflush(stdin);
+	printf("\nDigite o compositor da musica: ");
+	scanf("%s", musicas[i].compositor);
+	// Le compositor da musica
+	fflush(stdin);
+	musicas[i].nota = 0;
+	//Atribui 0 na nota
+	printf("Sua musica foi cadastrada com sucesso! Aperte qualquer tecla para voltar ao menu...");
+	getch();
+	// Esse comando eh para pausar a tela, quando apertar alguma coisa ele continua o codigo
+}
 
 int main(){
     int opcao = menu();
     //Recebe a opção digitada pelo usuário
-
+    
+    MUSICA musicas[10];
+    int posicaoMusica = 0;
+    // Define capacidade do sistema de armazenar as 10 musicas
+	// E define uma variavel para colocar as posicoes das musicas na funcao
+	
     if(opcao == 0){
     //Se a opção 0 for digitada encerra o programa
         char a = '\0';
@@ -23,6 +54,12 @@ int main(){
     }
     else if(opcao == 2){
     //Chama a função cadastra musica
+    	cadastrarMusica(musicas, posicaoMusica);
+    	printf("%s", musicas[posicaoMusica].nome);
+    	posicaoMusica++;
+    	printf("\n**TESTE**  posicaoMusica = %d", posicaoMusica);
+    	getch();
+    	// esta parte nao esta pronta ainda, eh so pra eu observar o comportamento 
     }
     else if(opcao == 3){
     //Chama a função de imprimir todas as bandas cadastradas
@@ -39,7 +76,6 @@ int main(){
     else if(opcao == 7){
     //Chama a função de avaliar musica
     }
-
 
     return 0;
 }
@@ -77,3 +113,4 @@ int menu(){
     return opcao;
     //Retorna a opção válida que foi digitada pelo usuário
 }
+
